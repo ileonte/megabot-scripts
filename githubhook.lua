@@ -34,7 +34,7 @@ function handle_closed_connection(info)
 		local added = com['added']
 		local removed = com['removed']
 		local modified = com['modified']
-		msg = msg .. string.format("%s: \"%s\" (%d modified, %d added, %d deleted)",
+		msg = msg .. string.format("%s: \"%s\" (modified: %d, added: %d, deleted: %d)",
 		                           com['author']['username'],
 						   com['message'],
 						   #modified,
@@ -44,7 +44,7 @@ function handle_closed_connection(info)
 	send_room_message(msg)
 end
 
-port = 12345
+port = nil
 if os.getenv('HOOK_PORT') ~= nil then
 	local p = tonumber(os.getenv('HOOK_PORT'))
 	if p ~= nil then
@@ -52,6 +52,10 @@ if os.getenv('HOOK_PORT') ~= nil then
 			port = p
 		end
 	end
+end
+if port == nil then
+	dout("You forgot to specify the port to listen on");
+	os.exit(1)
 end
 ok, err = server_listen('test', port)
 if (not ok) then
