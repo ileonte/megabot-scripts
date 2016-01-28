@@ -29,9 +29,8 @@ function handle_closed_connection(info)
 	end
 
 	local commits = obj['commits']
-	local msg = string.format("New commit(s) on:\n", obj['repository']['name'])
-	for i = 1, #commits, 1 do
-		local com = commits[i]
+	local msg = string.format("%d new commit(s) on %s:\n", #commits, obj['repository']['name'])
+	for i, com in ipairs(commits) do
 		local added = com['added']
 		local removed = com['removed']
 		local modified = com['modified']
@@ -42,6 +41,7 @@ function handle_closed_connection(info)
 						   #added,
 						   #removed)
 	end
+	send_room_message(msg)
 end
 
 ok, err = server_listen('test', 12345)
