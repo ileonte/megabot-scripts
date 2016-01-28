@@ -44,8 +44,17 @@ function handle_closed_connection(info)
 	send_room_message(msg)
 end
 
-ok, err = server_listen('test', 12345)
+port = 12345
+if os.getenv('HOOK_PORT') ~= nil then
+	local p = tonumber(os.getenv('HOOK_PORT'))
+	if p ~= nil then
+		if p > 1024 and p < 65536 then
+			port = p
+		end
+	end
+end
+ok, err = server_listen('test', port)
 if (not ok) then
 	dout(string.format("server_listen() failed: %s", err))
-	quit()
+	os.exit(1)
 end
