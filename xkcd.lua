@@ -8,7 +8,7 @@ local re_match = string.match
 local tolower = string.lower
 local db
 
-local upd_interval = 60000
+local upd_interval = 360000
 local updating = true
 local upd_idx = 0
 local max_idx = 0
@@ -33,7 +33,6 @@ function handle_network_reply( reply )
 			return
 		else
 			dout( "Failed to retrieve the max idx, aborting" )
-			quit()
 			return
 		end
 	end
