@@ -15,10 +15,11 @@ local max_idx = 0
 local announce_new = false
 
 function format_and_send_entry( ent )
-	local msg = sprintf( "XKCD: %s ( Posted on: %s, URL: %s )",
+	local msg = sprintf( "XKCD: %s ( Posted on: %s, URL: %s )\n%s",
 			ent.title,
 			ent.time,
-			sprintf( "http://xkcd.org/%d/", ent.id ) )
+			sprintf( "http://xkcd.org/%d/", ent.id ),
+			ent.alt )
 	send_room_message( msg )
 end
 
