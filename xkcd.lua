@@ -59,10 +59,11 @@ function handle_network_reply( reply )
 		return
 	end
 
-	sql = db:prepare( "INSERT INTO \"xkcd\" VALUES ( ?, ?, ? )" )
+	sql = db:prepare( "INSERT INTO \"xkcd\" VALUES ( ?, ?, ?, ? )" )
 	sql:bind( 1, data.num )
 	sql:bind( 2, sprintf( "%02d.%02d.%d", tonumber( data.day  ), tonumber( data.month ), tonumber( data.year ) ) )
 	sql:bind( 3, data.title )
+	sql:bind( 4, data.alt )
 	st = sql:step()
 	if ( st ~= sq.DONE ) then
 		if ( st == sq.CONSTRAINT ) then
@@ -182,7 +183,7 @@ if ( not db ) then
 	quit()
 end
 
-local st = db:exec( "CREATE TABLE IF NOT EXISTS \"xkcd\" ( \"id\" INTEGER PRIMARY KEY UNIQUE, \"time\", \"title\" )" )
+local st = db:exec( "CREATE TABLE IF NOT EXISTS \"xkcd\" ( \"id\" INTEGER PRIMARY KEY UNIQUE, \"time\", \"title\", \"alt\" )" )
 if ( st ~= sq.OK ) then
 	dout( sprintf( "Failed to create table: %d", st ) )
 	quit()
