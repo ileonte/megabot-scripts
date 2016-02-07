@@ -76,7 +76,8 @@ function handle_network_reply( reply )
 		format_and_send_entry( {
 			['title'] = data.title,
 			['time'] = sprintf( "%02d.%02d.%d", tonumber( data.day  ), tonumber( data.month ), tonumber( data.year ) ),
-			['id'] = data.num
+			['id'] = data.num,
+			['alt'] = data.alt
 		} )
 	end
 
