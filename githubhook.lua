@@ -29,12 +29,12 @@ function handle_closed_connection(info)
 	end
 
 	local commits = obj['commits']
-	local msg = string.format("%d new commit(s) on %s:\n", #commits, obj['repository']['name'])
+	local msg = string.format("%d new commit(s) on %s:", #commits, obj['repository']['name'])
 	for i, com in ipairs(commits) do
 		local added = com['added']
 		local removed = com['removed']
 		local modified = com['modified']
-		msg = msg .. string.format("%s: \"%s\" (modified: %d, added: %d, deleted: %d)",
+		msg = msg .. string.format("\n%s: \"%s\" (modified: %d, added: %d, deleted: %d)",
 		                           com['author']['username'],
 						   com['message'],
 						   #modified,
