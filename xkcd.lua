@@ -15,7 +15,7 @@ local max_idx = 0
 local announce_new = false
 
 function format_and_send_entry( ent )
-	local msg = sprintf( "XKCD: %s ( Posted on: %s, URL: %s )\n%s",
+	local msg = sprintf( "XKCD: %s ( Posted on: %s, URL: %s )\nAlt text: %s",
 			ent.title,
 			ent.time,
 			sprintf( "http://xkcd.org/%d/", ent.id ),
